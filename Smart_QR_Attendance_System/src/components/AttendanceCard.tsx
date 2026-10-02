@@ -1,5 +1,5 @@
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { createElement } from 'react';
 
 type Props = {
   studentName: string;
@@ -9,16 +9,17 @@ type Props = {
 };
 
 export function AttendanceCard({ studentName, status, time, date }: Props) {
-  return createElement(
-    View,
-    { style: styles.card },
-    createElement(
-      View,
-      { style: styles.row },
-      createElement(Text, { style: styles.name }, studentName),
-      createElement(Text, { style: styles.status }, status),
-    ),
-    createElement(Text, { style: styles.time }, `${date} at ${time}`),
+  return (
+    <View style={styles.card}>
+      <View style={styles.row}>
+        <Text style={styles.name}>{studentName}</Text>
+        <Text style={styles.status}>{status}</Text>
+      </View>
+
+      <Text style={styles.time}>
+        {time} • {date}
+      </Text>
+    </View>
   );
 }
 
@@ -31,8 +32,27 @@ const styles = StyleSheet.create({
     borderLeftWidth: 5,
     borderLeftColor: '#1B7F4B',
   },
-  row: { flexDirection: 'row', justifyContent: 'space-between' },
-  name: { fontSize: 16, fontWeight: 'bold' },
-  status: { fontWeight: 'bold', color: '#1B7F4B' },
-  time: { marginTop: 4, color: '#666' },
+
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  name: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+
+  status: {
+    fontWeight: 'bold',
+    color: '#1B7F4B',
+  },
+
+  time: {
+    marginTop: 4,
+    color: '#666',
+    fontSize: 12,
+  },
 });

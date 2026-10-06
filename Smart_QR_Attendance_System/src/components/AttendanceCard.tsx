@@ -9,6 +9,7 @@ type Props = {
 };
 
 export function AttendanceCard({ studentName, status, time, date }: Props) {
+    const isPresent = status.toLowerCase() === 'present';
   return createElement(
     View,
     { style: styles.card },
@@ -16,7 +17,16 @@ export function AttendanceCard({ studentName, status, time, date }: Props) {
       View,
       { style: styles.row },
       createElement(Text, { style: styles.name }, studentName),
-      createElement(Text, { style: styles.status }, status),
+      createElement(
+    Text,
+    {
+    style: [
+      styles.status,
+      isPresent ? styles.present : styles.otherStatus,
+    ],
+  },
+  status,
+),
     ),
     createElement(Text, { style: styles.time }, `${date} at ${time}`),
   );
@@ -31,8 +41,31 @@ const styles = StyleSheet.create({
     borderLeftWidth: 5,
     borderLeftColor: '#1B7F4B',
   },
-  row: { flexDirection: 'row', justifyContent: 'space-between' },
-  name: { fontSize: 16, fontWeight: 'bold' },
-  status: { fontWeight: 'bold', color: '#1B7F4B' },
-  time: { marginTop: 4, color: '#666' },
-});
+
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+    name: {
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+
+    status: {
+      fontWeight: 'bold',
+    },
+
+    present: {
+      color: '#1B7F4B',
+    },
+
+    otherStatus: {
+      color: '#D97706',
+    },
+
+    time: {
+      marginTop: 4,
+      color: '#666',
+    },
+  });

@@ -1,8 +1,10 @@
 // A QR Scanner, uses the camera to scan QR codes
 
 import { useState } from 'react';
-import { View, Text, Button, } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
+import StatusMessage from './StatusMessage';
+
 
 type QRScannerProps = {
     onScan: (data: string) => void;
@@ -13,25 +15,36 @@ export default function QRScanner({ onScan }: QRScannerProps) {
     const [scanned, setScanned] = useState(false);
 
     if (!permission) {
-        return <Text>Loading...</Text>;
-    }
+    return (
+        <View style={styles.messageContainer}>
+            <StatusMessage
+                type="info"
+                message="Checking camera permission..."
+            />
+        </View>
+    );
+}
 
     if (!permission.granted) {
-        return (
-            <View>
-                <Text>Camera permission is required.</Text>
+    return (
+        <View style={styles.messageContainer}>
+            <StatusMessage
+                type="warning"
+                message="Camera permission is required."
+            />
 
-                <Button
+            <Button
                 title="Allow Camera"
                 onPress={requestPermission}
             />
-            </View>
-        );
-    }
+        </View>
+    );
+}
 
     return (
+    <View style={styles.scannerContainer}>
         <CameraView
-            style={{ flex: 1 }}
+            style={styles.camera}
             barcodeScannerSettings={{
                 barcodeTypes: ['qr'],
             }}
@@ -39,9 +52,50 @@ export default function QRScanner({ onScan }: QRScannerProps) {
                 if (scanned) {
                     return;
                 }
+
                 setScanned(true);
                 onScan(data);
             }}
         />
+
+        <View style={styles.instruzctionContainer}>
+            <Text style={styles.instruction}>
+                Scan the attendance QR code
+            </Text>
+        </View>
+    </View>
     );
+    
 }
+
+const styles = StyleSheet.create({
+    scannerContainer: {
+        flex: 1,
+    },
+
+    camera: {
+        flex: 1,
+    },
+
+    instructionContainer: {
+        position: 'absolute',
+        bottom: 40,
+        left: 20,
+        right: 20,
+        alignItems: 'center',
+    },
+
+    instruction: {
+        backgroundColor: 'rgba(0, 0, 0, 0.65)',
+        color: '#FFFFFF',
+        paddingVertical: 10,
+        paddingHorizontal: 16,
+        borderRadius: 8,
+        fontSize: 14,
+        fontWeight: '600',
+    },
+
+    messageContainer: {
+        padding: 20,
+    },
+});

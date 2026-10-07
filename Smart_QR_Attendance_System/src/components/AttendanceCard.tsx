@@ -9,17 +9,26 @@ type Props = {
 };
 
 export function AttendanceCard({ studentName, status, time, date }: Props) {
-  return (
-    <View style={styles.card}>
-      <View style={styles.row}>
-        <Text style={styles.name}>{studentName}</Text>
-        <Text style={styles.status}>{status}</Text>
-      </View>
-
-      <Text style={styles.time}>
-        {time} • {date}
-      </Text>
-    </View>
+    const isPresent = status.toLowerCase() === 'present';
+  return createElement(
+    View,
+    { style: styles.card },
+    createElement(
+      View,
+      { style: styles.row },
+      createElement(Text, { style: styles.name }, studentName),
+      createElement(
+    Text,
+    {
+    style: [
+      styles.status,
+      isPresent ? styles.present : styles.otherStatus,
+    ],
+  },
+  status,
+),
+    ),
+    createElement(Text, { style: styles.time }, `${date} at ${time}`),
   );
 }
 
@@ -36,23 +45,27 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
 
-  name: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-  },
+    name: {
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
 
-  status: {
-    fontWeight: 'bold',
-    color: '#1B7F4B',
-  },
+    status: {
+      fontWeight: 'bold',
+    },
 
-  time: {
-    marginTop: 4,
-    color: '#666',
-    fontSize: 12,
-  },
-});
+    present: {
+      color: '#1B7F4B',
+    },
+
+    otherStatus: {
+      color: '#D97706',
+    },
+
+    time: {
+      marginTop: 4,
+      color: '#666',
+    },
+  });

@@ -1,8 +1,8 @@
 // A QR Scanner, uses the camera to scan QR codes
 
-import { useState } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
+import React, { useState } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import StatusMessage from './StatusMessage';
 
 
@@ -58,7 +58,7 @@ export default function QRScanner({ onScan }: QRScannerProps) {
             }}
         />
 
-        <View style={styles.instruzctionContainer}>
+        <View style={styles.instructionContainer}>
             <Text style={styles.instruction}>
                 Scan the attendance QR code
             </Text>

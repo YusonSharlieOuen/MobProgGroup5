@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { createElement } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 type Props = {
   studentName: string;

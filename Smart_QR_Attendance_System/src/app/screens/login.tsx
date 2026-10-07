@@ -1,12 +1,12 @@
-import {useState} from 'react';
+import { router } from 'expo-router';
+import React, { useState } from 'react';
 import {
-    View,
-    Text, 
-    TextInput,
-    Pressable, 
-    StyleSheet,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
 } from 'react-native';
-import {router} from 'expo-router';
 
 export default function LoginScreen () {
     const [studentId, setStudentId] = useState ('');

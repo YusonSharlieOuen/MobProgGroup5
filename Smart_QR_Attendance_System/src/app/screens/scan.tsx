@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { View, Text } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View } from 'react-native';
 
-import ScanButton from '@/components/ScanButton';
 import QRScanner from '@/components/QRScanner';
+import ScanButton from '@/components/ScanButton';
 
 export default function ScanScreen() {
     const [scanning, setScanning] = useState(false);

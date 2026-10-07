@@ -3,6 +3,7 @@
 // Also, I lowkey dont know how to run the page without an extra folder.
 
 import { Link } from 'expo-router';
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 export default function TestPage() {

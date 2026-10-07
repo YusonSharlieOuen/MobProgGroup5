@@ -1,6 +1,7 @@
 // Scan Button
 
-import { Pressable, Text, Stylesheet } from 'react-native';
+import React from 'react';
+import { Pressable, StyleSheet, Text } from 'react-native';
 
 type ScanButtonProps = {
     onPress: () => void;

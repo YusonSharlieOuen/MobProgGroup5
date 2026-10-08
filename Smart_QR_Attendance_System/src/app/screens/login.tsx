@@ -11,14 +11,19 @@ import {router} from 'expo-router';
 export default function LoginScreen () {
     const [studentId, setStudentId] = useState ('');
     const [password, setPassword] = useState ('');
+    const [error, setError] = useState ('');
 
     function handleLogin() {
         if (studentId === '' || password === ''){
+            setError('Please enter your Student ID and password.');
             return;
         }
 
-        if(studentId === 'student' && password === '1234'){
+        if(studentId === '202212345' && password === '1234'){
+            setError('');
             router.replace('/screens/dashboard');
+    } else {
+        setError('Invalid Student ID and password.');
     }
 }
 
@@ -55,8 +60,14 @@ return (
           Login
         </Text>
       </Pressable>
+      
+      {error !== '' && (
+    <Text style={styles.error}>
+        {error}
+    </Text>
+    )}
     </View>
-  );
+);
 }
 
 const styles = StyleSheet.create({
@@ -100,4 +111,11 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
   },
+
+  error:{
+    color: 'red',
+    textAlign: 'center',
+    marginTop: 12,
+    fontWeight: 'bold',
+  }
 });

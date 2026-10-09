@@ -1,10 +1,10 @@
 // This page is only for testing purposes.
 // I made this so I can try and use the camera button and its functionalities
 // Also, I lowkey dont know how to run the page without an extra folder.
-
-import { Link } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { Link } from 'expo-router';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { Palette } from '@/constants/palette';
 

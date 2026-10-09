@@ -26,7 +26,7 @@ function getDevMenuHint() {
 
 //Auto opens to the TestPage
 export default function TestPage() {
-  return <Redirect href="/screens/testpage" />;
+  return <Redirect href="/screens/login" />;
 }
 
 // export default function HomeScreen() {

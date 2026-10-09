@@ -1,6 +1,6 @@
 import { AttendanceRecord, getAttendanceHistory, saveAttendanceRecord } from './storage';
 
-export async function processAttendanceScan(scannedData: string): {
+export async function processAttendanceScan(scannedData: string): Promise<AttendanceRecord> {
   const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
   const currentTime = new Date().toLocaleTimeString();
 

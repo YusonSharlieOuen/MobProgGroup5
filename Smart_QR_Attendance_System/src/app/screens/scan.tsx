@@ -1,19 +1,31 @@
-import { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import ScanButton from '@/components/ScanButton';
+import { processAttendanceScan } from '@/services/attendanceLogic';
 import { Ionicons } from '@expo/vector-icons';
-
+import { router } from 'expo-router';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 import QRScanner from '@/components/QRScanner';
-import { Palette, Shadow } from '@/constants/palette'   ;
+import { Palette, Shadow } from '@/constants/palette';
 
 
 export default function ScanScreen() {
     const [scanning, setScanning] = useState(false);
-    const [result, setResult] = useState('');
 
-    function handleScan(data: string) {
-        setResult(data);
+    async function handleScan(data: string) {
+        const attendance = await processAttendanceScan(data);
+
         setScanning(false);
+
+        router.push({
+            pathname: '/screens/AttendanceResult',
+            params: {
+                studentName: attendance.studentName,
+                status: attendance.status,
+                date: attendance.date,
+                time: attendance.time,
+            },
+        });
     }
 
     return (
@@ -33,13 +45,6 @@ export default function ScanScreen() {
                     <ScanButton
                         onPress={() => setScanning(true)}
                     />
-
-                    <View style={styles.resultCard}>
-                        <Text style={styles.resultLabel}>Scanned:</Text>
-                        <Text style={styles.resultValue}>
-                            {result || 'Nothing scanned yet'}
-                        </Text>
-                    </View>
                 </>
             )}
 

@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { Palette } from '@/constants/palette';
+import React from 'react';
 
 
 type StatusMessageProps = {

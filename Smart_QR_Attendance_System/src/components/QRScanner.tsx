@@ -1,10 +1,10 @@
 // A QR Scanner, uses the camera to scan QR codes
 
+import { Palette } from '@/constants/palette';
 import { CameraView, useCameraPermissions } from 'expo-camera';
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import StatusMessage from './StatusMessage';
-import { Palette } from '@/constants/palette';
 
 
 type QRScannerProps = {
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     },
 
     overlay: {
-        ...StyleSheet.absoluteFillObject,
+        ...StyleSheet.absoluteFill,
         alignItems: 'center',
         justifyContent: 'center',
     },

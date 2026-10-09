@@ -8,6 +8,10 @@ export default function DashboardScreen() {
         router.push('/screens/scan');
     }
 
+    function openAttendaceHistory() {
+        router.push('/screens/AttendanceHistory');
+    }
+
     return (
         <View style= {styles.container}>
 
@@ -25,6 +29,15 @@ export default function DashboardScreen() {
             >
                 <Text style={styles.buttonText}>
                     Scan QR Code
+                    </Text>
+                </Pressable>
+
+            <Pressable
+            style= {styles.scanButton}
+            onPress={openAttendaceHistory}
+            >
+                <Text style={styles.buttonText}>
+                    View Attendance History
                     </Text>
                 </Pressable>
 

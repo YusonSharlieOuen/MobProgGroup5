@@ -1,5 +1,6 @@
 import * as Device from 'expo-device';
 import { Redirect } from 'expo-router';
+import React from 'react';
 import { Platform } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';

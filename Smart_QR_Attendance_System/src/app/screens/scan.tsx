@@ -3,7 +3,6 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 
-import ScanButton from '@/components/ScanButton';
 import QRScanner from '@/components/QRScanner';
 import { Palette, Shadow } from '@/constants/palette'   ;
 

@@ -14,10 +14,12 @@ export async function processAttendanceScan(scannedData: string): {
     };
   }
 
+  const studentInfo = scannedData.replace(/\n/g, ' ').trim();
+
   const history = await getAttendanceHistory();
 
   const alreadyScanned = history.some(
-    (item) => item.studentName === scannedData && item.date === currentDate
+    (item) => item.studentName.toLowerCase() === studentInfo.toLowerCase() && item.date === currentDate
   );
 
   const status = alreadyScanned ? 'Duplicate' : 'Present';

@@ -1,8 +1,8 @@
 // A QR Scanner, uses the camera to scan QR codes
 
-import { useState } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
 import { CameraView, useCameraPermissions } from 'expo-camera';
+import React, { useState } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import StatusMessage from './StatusMessage';
 import { Palette } from '@/constants/palette';
 

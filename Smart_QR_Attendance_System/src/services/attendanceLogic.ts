@@ -4,7 +4,13 @@ export async function processAttendanceScan(scannedData: string): Promise<Attend
   const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
   const currentTime = new Date().toLocaleTimeString();
 
-  if (!scannedData || scannedData.trim() === '') {
+  if (
+    !scannedData ||
+    scannedData.trim() === '' ||
+    scannedData.includes('+') ||
+    scannedData.includes('=') ||
+    scannedData.includes('/')
+  ) {
     return {
       id: Date.now().toString(),
       studentName: 'Invalid QR',

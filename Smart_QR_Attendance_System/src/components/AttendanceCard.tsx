@@ -1,6 +1,7 @@
 import { createElement } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+
 type Props = {
   studentName: string;
   status: string;
@@ -45,27 +46,41 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
 
     name: {
-      fontSize: 16,
-      fontWeight: 'bold',
+      fontSize: 17,
+      fontWeight: '700',
+      color: '#0F172A',
+      flex: 1,
+      marginRight: 10,
     },
 
     status: {
-      fontWeight: 'bold',
+      fontSize: 12,
+      fontWeight: '700',
+      paddingVertical: 4,
+      paddingHorizontal: 12,
+      borderRadius: 20,
+      overflow: 'hidden',
+      textTransform: 'uppercase',
+      letterSpacing: 0.5,
     },
 
     present: {
-      color: '#1B7F4B',
+      color: '#15803D',
+      backgroundColor: '#DCFCE7',
     },
 
     otherStatus: {
-      color: '#D97706',
+      color: '#B45309',
+      backgroundColor: '#FEF3C7',
     },
 
     time: {
-      marginTop: 4,
-      color: '#666',
+      marginTop: 6,
+      fontSize: 13,
+      color: '#64748B',
     },
   });

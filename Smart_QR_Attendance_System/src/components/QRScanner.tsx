@@ -4,6 +4,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import StatusMessage from './StatusMessage';
+import { Palette } from '@/constants/palette';
 
 
 type QRScannerProps = {
@@ -33,10 +34,12 @@ export default function QRScanner({ onScan }: QRScannerProps) {
                 message="Camera permission is required."
             />
 
-            <Button
-                title="Allow Camera"
+            <Pressable
+                style={({ pressed }) => [styles.allowButton, pressed && styles.pressed]}
                 onPress={requestPermission}
-            />
+            >
+                <Text style={styles.allowText}>Allow Camera</Text>
+            </Pressable>
         </View>
     );
 }
@@ -58,6 +61,15 @@ export default function QRScanner({ onScan }: QRScannerProps) {
             }}
         />
 
+        <View style={styles.overlay} pointerEvents="none">
+            <View style={styles.frame}>
+                <View style={[styles.corner, styles.topLeft]} />
+                <View style={[styles.corner, styles.topRight]} />
+                <View style={[styles.corner, styles.bottomLeft]} />
+                <View style={[styles.corner, styles.bottomRight]} />
+            </View>
+        </View>
+
         <View style={styles.instructionContainer}>
             <Text style={styles.instruction}>
                 Scan the attendance QR code
@@ -68,13 +80,63 @@ export default function QRScanner({ onScan }: QRScannerProps) {
     
 }
 
+const CORNER = 44;
+const THICK = 5;
+
 const styles = StyleSheet.create({
     scannerContainer: {
         flex: 1,
+        backgroundColor: '#000000',
     },
 
     camera: {
         flex: 1,
+    },
+
+    overlay: {
+        ...StyleSheet.absoluteFillObject,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    frame: {
+        width: 250,
+        height: 250,
+    },
+
+    corner: {
+        position: 'absolute',
+        width: CORNER,
+        height: CORNER,
+        borderColor: Palette.primary,
+    },
+    topLeft: {
+        top: 0,
+        left: 0,
+        borderTopWidth: THICK,
+        borderLeftWidth: THICK,
+        borderTopLeftRadius: 20,
+    },
+    topRight: {
+        top: 0,
+        right: 0,
+        borderTopWidth: THICK,
+        borderRightWidth: THICK,
+        borderTopRightRadius: 20,
+    },
+    bottomLeft: {
+        bottom: 0,
+        left: 0,
+        borderBottomWidth: THICK,
+        borderLeftWidth: THICK,
+        borderBottomLeftRadius: 20,
+    },
+    bottomRight: {
+        bottom: 0,
+        right: 0,
+        borderBottomWidth: THICK,
+        borderRightWidth: THICK,
+        borderBottomRightRadius: 20,
     },
 
     instructionContainer: {
@@ -86,16 +148,33 @@ const styles = StyleSheet.create({
     },
 
     instruction: {
-        backgroundColor: 'rgba(0, 0, 0, 0.65)',
+        backgroundColor: 'rgba(15, 23, 42, 0.8)',
         color: '#FFFFFF',
-        paddingVertical: 10,
-        paddingHorizontal: 16,
-        borderRadius: 8,
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 24,
+        overflow: 'hidden',
         fontSize: 14,
         fontWeight: '600',
     },
 
     messageContainer: {
         padding: 20,
+    },
+
+    allowButton: {
+        backgroundColor: Palette.primary,
+        paddingVertical: 14,
+        borderRadius: 14,
+        alignItems: 'center',
+        marginTop: 8,
+    },
+    allowText: {
+        color: '#FFFFFF',
+        fontSize: 16,
+        fontWeight: '700',
+    },
+    pressed: {
+        opacity: 0.8,
     },
 });

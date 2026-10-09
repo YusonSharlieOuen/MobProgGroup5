@@ -1,47 +1,49 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+
+import { Palette } from '@/constants/palette';
+
 
 type StatusMessageProps = {
   message: string;
   type?: 'success' | 'error' | 'warning' | 'info';
 };
 
+    const CONFIG = {
+      success: { icon: 'checkmark-circle', color: Palette.success, bg: Palette.successBg },
+      error: { icon: 'close-circle', color: Palette.error, bg: Palette.errorBg },
+      warning: { icon: 'warning', color: Palette.warning, bg: Palette.warningBg },
+      info: { icon: 'information-circle', color: Palette.info, bg: Palette.infoBg },
+    } as const;
+
 export default function StatusMessage({
   message, 
   type = 'info',
-}: StatusMessageProps) {
+  }: StatusMessageProps) {
+    const { icon, color, bg } = CONFIG[type];
+
   return (
-    <View style={[styles.container, styles[type]]}>
-      <Text style={styles.text}>{message}</Text>
+    <View style={[styles.container, { backgroundColor: bg, borderLeftColor: color }]}>
+      <Ionicons name={icon} size={24} color={color} />
+      <Text style={[styles.text, { color }]}>{message}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 12,
-    borderRadius: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    padding: 14,
+    borderRadius: 12,
+    borderLeftWidth: 5,
     marginVertical: 8,
   },
 
   text: {
+    flex: 1,
     fontSize: 14,
     fontWeight: '600',
-  },
-
-  success: {
-    backgroundColor: '#E8F5E9',
-  },
-
-  error: {
-    backgroundColor: '#FFEBEE',
-  },
-
-  warning: {
-    backgroundColor: '#FFF8E1',
-  },
-
-  info: {
-    backgroundColor: '#E3F2FD',
   },
 });
